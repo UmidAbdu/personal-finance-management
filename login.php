@@ -22,9 +22,6 @@ while ($row = mysqli_fetch_array($select_user_query)){
 if($username === $db_username and $password === $db_user_password){
     $_SESSION['user_id'] = $db_id;
     $_SESSION['username'] = $db_username;
-    $_SESSION['firstname'] = $db_user_firstname;
-    $_SESSION['lastname'] = $db_user_lastname;
-    $_SESSION['profile_picture'] = $db_user_picture;
     header("Location:index.php?{$_SESSION['username']}");
 }
 }
@@ -58,7 +55,6 @@ if($username === $db_username and $password === $db_user_password){
                                         <hr><a class="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button"><i class="fab fa-google"></i>&nbsp; Login with Google</a><a class="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>
                                         <hr>
                                     </form>
-                                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
                                     <div class="text-center"><a class="small" href="register.php">Create an Account!</a></div>
                                 </div>
                             </div>

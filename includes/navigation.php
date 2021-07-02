@@ -5,6 +5,8 @@ $select_user_id = mysqli_query($connection, $query);
 
 while ($row = mysqli_fetch_assoc($select_user_id)){
 
+    $firstname = $row['firstname'];
+    $lastname = $row['lastname'];
     $profile_picture = $row['profile_picture'];
 }
 ?>
@@ -18,7 +20,7 @@ while ($row = mysqli_fetch_assoc($select_user_id)){
                         <div class="nav-item dropdown no-arrow">
                             <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
                                 <span class="d-none d-lg-inline me-2 text-gray-600 small">
-                                    <?=$_SESSION['firstname'] . ' ' . $_SESSION['lastname']?>
+                                    <?=$firstname . ' ' . $lastname?>
                                 </span>
                                 <img class="border rounded-circle img-profile" src="../img/<?=$profile_picture?>">
                             </a>
@@ -26,7 +28,7 @@ while ($row = mysqli_fetch_assoc($select_user_id)){
                                 <a class="dropdown-item" href="../profile.php">
                                     <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400">
                                     </i>&nbsp;Profile</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="../logout.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                             </div>
                         </div>

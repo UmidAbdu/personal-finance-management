@@ -49,7 +49,7 @@ if(isset($_POST['save_settings'])){
     }
 }
 
-if (isset($_POST['contact_setting'])){
+if(isset($_POST['contact_settings'])){
 
     $address = $_POST['address'];
     $city = $_POST['city'];
@@ -63,15 +63,10 @@ if (isset($_POST['contact_setting'])){
 
     $update_contacts = mysqli_query($connection, $query);
 
-    if($update_contacts){
+    if(!$update_contacts){
         die('QUERY FAILED' . mysqli_error($connection));
     }
-
-
-
-
 }
-
 ?>
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Profile</h3>
