@@ -1,5 +1,4 @@
 <?php
-session_start();
 $query = "SELECT * FROM users WHERE user_id = {$_SESSION['user_id']}";
 $select_user_id = mysqli_query($connection, $query);
 
@@ -41,20 +40,20 @@ if (isset($_POST['submit'])){
                         }
                     </style>
                     <select name="type" id="list" onchange="jumb()">
-                        <option id='dis'>select type:</option>
-                        <option value="income" >income</option>
-                        <option value="expense">expense</option>
+                        <option id='dis'><?=$lang['type']?></option>
+                        <option value="income" ><?=$lang['income']?></option>
+                        <option value="expense"><?=$lang['expense']?></option>
                     </select>
                     <select name="category" class="sel-1" id="list-2">
-                        <option  id="dis"></option>
-                        <option value="salary " class="income">Salary</option>
-                        <option value="inc " class="income">Income</option>
-                        <option value="food" class="expense">Food</option>
-                        <option value="transport " class="expense">Transport</option>
-                        <option value="mobile " class="expense">Mobile</option>
-                        <option value="internet " class="expense">Internet</option>
-                        <option value="fun " class="expense">Fun</option>
-                        <option value="other" class="expense">Other</option>
+                        <option  id="dis"><?=$lang['category']?></option>
+                        <option value="salary " class="income"><?=$lang['salary']?></option>
+                        <option value="inc " class="income"><?=$lang['inc']?></option>
+                        <option value="food" class="expense"><?=$lang['food']?></option>
+                        <option value="transport " class="expense"><?=$lang['transport']?></option>
+                        <option value="mobile " class="expense"><?=$lang['mobile']?></option>
+                        <option value="internet " class="expense"><?=$lang['internet']?></option>
+                        <option value="fun " class="expense"><?=$lang['fun']?></option>
+                        <option value="other" class="expense"><?=$lang['other']?></option>
                     </select>
 
                     <script>
@@ -75,9 +74,9 @@ if (isset($_POST['submit'])){
 
                         }
                     </script>
-                <input style="margin-right: 5px" type="number" name="amount" placeholder="amount" required>
-                    <input type="text" name="comment" placeholder="comment">
-                <input class="btn btn-primary" type="submit" value="Submit" name="submit">
+                <input style="margin-right: 5px" type="number" name="amount" placeholder="<?=$lang['amount']?>" required>
+                    <input type="text" name="comment" placeholder="<?=$lang['comment']?>">
+                <input class="btn btn-primary" type="submit" value="<?=$lang['submit']?>" name="submit">
                 </form>
                 <ul class="navbar-nav flex-nowrap ms-auto">
                     <div class="d-none d-sm-block topbar-divider"></div>
@@ -92,9 +91,9 @@ if (isset($_POST['submit'])){
                             <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
                                 <a class="dropdown-item" href="../profile.php">
                                     <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400">
-                                    </i>&nbsp;Profile</a>
+                                    </i>&nbsp;<?=$lang['profile']?></a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item" href="../logout.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;<?=$lang['logout']?></a>
                             </div>
                         </div>
                     </li>

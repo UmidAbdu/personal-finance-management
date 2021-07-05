@@ -69,7 +69,7 @@ if(isset($_POST['contact_settings'])){
 }
 ?>
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Profile</h3>
+    <h3 class="text-dark mb-4"><?=$lang['profile']?></h3>
     <div class="row mb-3">
         <div class="col-lg-4">
             <div class="card mb-3">
@@ -77,7 +77,7 @@ if(isset($_POST['contact_settings'])){
                 <div class="card-body text-center shadow">
                     <img class="rounded-circle mb-3 mt-4" src="img/<?=$profile_picture?>" width="160" height="160">
                     <div class="mb-3">
-                        <button class="btn btn-primary btn-sm" type="button" onclick="document.getElementById('getFile').click()">Change Photo</button>
+                        <button class="btn btn-primary btn-sm" type="button" onclick="document.getElementById('getFile').click()"><?=$lang['changePhoto']?></button>
                         <input type='file' id="getFile" name="profile_picture" style="display:none">
                     </div>
                 </div>
@@ -145,14 +145,14 @@ if(isset($_POST['contact_settings'])){
                 <div class="col">
                     <div class="card shadow mb-3">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">User Settings</p>
+                            <p class="text-primary m-0 fw-bold"><?=$lang['userSettings']?></p>
                         </div>
                         <div class="card-body">
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="username">
-                                                <strong>Username</strong>
+                                                <strong><?=$lang['username_holder']?></strong>
                                             </label>
                                             <input class="form-control" type="text" id="username" value="<?=$username?>" name="username">
                                         </div>
@@ -160,7 +160,7 @@ if(isset($_POST['contact_settings'])){
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="email">
-                                                <strong>Email Address</strong></label>
+                                                <strong><?=$lang['email_holder']?></strong></label>
                                             <input class="form-control" type="email" id="email" value="<?=$email?>" name="email">
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@ if(isset($_POST['contact_settings'])){
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3"><label class="form-label" for="first_name">
-                                                <strong>First Name</strong>
+                                                <strong><?=$lang['firstname_holder']?></strong>
                                             </label>
                                             <input class="form-control" type="text" id="first_name" value="<?=$firstname?>" name="firstname">
                                         </div>
@@ -176,25 +176,25 @@ if(isset($_POST['contact_settings'])){
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="last_name">
-                                                <strong>Last Name</strong>
+                                                <strong><?=$lang['Lastname_holder']?></strong>
                                             </label>
                                             <input class="form-control" type="text" id="last_name" value="<?=$lastname?>" name="lastname">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-3"><input class="btn btn-primary btn-sm" type="submit" name="save_settings" value="Save Settings"></div>
+                                <div class="mb-3"><input class="btn btn-primary btn-sm" type="submit" name="save_settings" value="<?=$lang['saveSettings']?>"></div>
                             </form>
                         </div>
                     </div>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Contact Settings</p>
+                            <p class="text-primary m-0 fw-bold"><?=$lang['contactSetting']?></p>
                         </div>
                         <div class="card-body">
                             <form action="" method="post">
                                 <div class="mb-3">
                                     <label class="form-label" for="address">
-                                        <strong>Address</strong>
+                                        <strong><?=$lang['address']?></strong>
                                     </label>
                                     <input class="form-control" type="text" id="address" value="<?=$address?>" name="address">
                                 </div>
@@ -202,7 +202,7 @@ if(isset($_POST['contact_settings'])){
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="city">
-                                                <strong>City</strong>
+                                                <strong><?=$lang['city']?></strong>
                                             </label>
                                             <input class="form-control" type="text" id="city" value="<?=$city?>" name="city">
                                         </div>
@@ -210,13 +210,13 @@ if(isset($_POST['contact_settings'])){
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="country">
-                                                <strong>Country</strong>
+                                                <strong><?=$lang['country']?></strong>
                                             </label>
                                             <input class="form-control" type="text" id="country" value="<?=$country?>" name="country">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-3"><input class="btn btn-primary btn-sm" type="submit" name="contact_settings" value="Save Settings">
+                                <div class="mb-3"><input class="btn btn-primary btn-sm" type="submit" name="contact_settings" value="<?=$lang['saveSettings']?>">
                                 </div>
                             </form>
                         </div>

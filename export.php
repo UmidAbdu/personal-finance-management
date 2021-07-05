@@ -1,29 +1,27 @@
-<?php include "includes/header.php";
+
+<?php
+include("includes/db.php");
+
+$query = "SELECT * FROM transactions ORDER BY t_date DESC";
+if (!$result = mysqli_query($connection, $query)) {
+    exit(mysqli_error($connection));
+}
+
+$transactions = array();
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $transactions[] = $row;
+    }
+}
+
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=transactions.csv');
+$output = fopen('php://output', 'w');
+fputcsv($output, array('ID', 'Type', 'category', 'amount', 'data', 'comment'));
+
+if (count($transactions) > 0) {
+    foreach ($transactions as $row) {
+        fputcsv($output, $row);
+    }
+}
 ?>
-
-<select class="selectpicker" multiple data-actions-box="true">
-    <option>Mustard</option>
-    <option>Ketchup</option>
-    <option>Relish</option>
-</select>
-
-<form action="" method="post">
-    <select name="type">
-        <option value="income">income</option>
-        <option value="expense">expense</option>
-    </select>
-    <select name="category">
-        <option value="salary">Salary</option>
-        <option value="inc">Income</option>
-        <option value="food">Food</option>
-        <option value="transport">Transport</option>
-        <option value="mobile">Mobile</option>
-        <option value="internet">Internet</option>
-        <option value="fun">Fun</option>
-        <option value="other">Other</option>
-
-    </select>
-    <input style="margin-right: 10px" type="number" name="amount" required>
-    <input type="text" name="comment">
-    <input class="btn btn-primary" type="submit" value="Submit" name="submit">
-</form>
