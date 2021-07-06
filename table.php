@@ -54,8 +54,8 @@ include "includes/navigation.php";
                                             <td><?=$type?></td>
                                             <td><?=$category?></td>
                                             <td><?=$date?></td>
-                                            <td><?=number_format($amount) . ' UZS'?></td>
-                                            <td><?=number_format($balance) . ' UZS'?></td>
+                                            <td><?=number_format($amount, 2, ".", " ") . ' UZS'?></td>
+                                            <td><?=number_format($balance, 2, ".", " ") . ' UZS'?></td>
                                             <td><?=substr($comment,0,20)?></td>
                                         </tr>
                                     </tbody>

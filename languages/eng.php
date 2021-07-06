@@ -8,6 +8,7 @@ $lang = array(
     "pholerp" => "Password",
     "btnlog" => "Login",
     "create_account" => "Create an account",
+    "wrong" => "Wrong username or password",
 
 
     //register.php

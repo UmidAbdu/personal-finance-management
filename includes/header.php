@@ -9,6 +9,7 @@ if(isset($_SESSION['lang'])){
 } else {
     include "languages/ru.php";
 }
+include "functions.php";
 ?>
 
 <!DOCTYPE html>

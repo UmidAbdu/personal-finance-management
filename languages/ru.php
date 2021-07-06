@@ -8,13 +8,14 @@ $lang = array(
     "pholerp" => "Пароль",
     "btnlog" => "Логин",
     "create_account" => "Создайте учетную запись",
+    "wrong" => "Неправильный логин или пароль",
 
     //register.php
     "titler" => "Регистрация",
     "firstname_holder" => "Имя",
     "Lastname_holder" => "Фамилия",
     "email_holder" => "Адрес электронной почты",
-    "phone_holder" => "Телефонный номер",
+    "phone_holder" => "Телефон номер",
     "username_holder" => "Имя пользователя",
     "repeatPassword" => "Повторите пароль",
     "registerAccount" => "Регистрация Аккаунта",
@@ -54,7 +55,7 @@ $lang = array(
     "totalExpenses" => "Суммарные расходы",
     "monthlyExpense" => "Ежемесячный расход",
     "monthlyIncome" => "Ежемесячный доход",
-    "earningsOverview" => "Обзор заработка",
+    "earningsOverview" => "Обзор баланса",
     "expenses" => "Расходы(%)",
 
     //profile.php
@@ -71,6 +72,5 @@ $lang = array(
     "history" => "История за месяц",
     "transactions" => "Операции",
     "total" => "Остаток средств"
-
 
 );

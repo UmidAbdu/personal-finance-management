@@ -23,16 +23,25 @@ include "includes/navigation.php";
 
 if(isset($_POST['save_settings'])){
 
-    $username = $_POST['username'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
+    $username = escape($_POST['username']);
+    $firstname = escape($_POST['firstname']);
+    $lastname = escape($_POST['lastname']);
+    $email = escape($_POST['email']);
 
     //updating image
     $profile_picture = $_FILES['profile_picture']['name'];
     $profile_picture_temp = $_FILES['profile_picture']['tmp_name'];
 
     move_uploaded_file($profile_picture_temp, "img/$profile_picture");
+
+    if(empty($profile_picture)){
+        $query = "SELECT * FROM users WHERE user_id = {$_SESSION['user_id']} ";
+        $select_image = mysqli_query($connection, $query);
+
+        while ($row = mysqli_fetch_assoc($select_image)){
+            $profile_picture = $row['profile_picture'];
+        }
+    }
 
     $query = "UPDATE users SET ";
     $query .= "username = '{$username}',";
@@ -51,9 +60,9 @@ if(isset($_POST['save_settings'])){
 
 if(isset($_POST['contact_settings'])){
 
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-    $country = $_POST['country'];
+    $address = escape($_POST['address']);
+    $city = escape($_POST['city']);
+    $country = escape($_POST['country']);
 
     $query = "UPDATE users SET ";
     $query .= "address = '{$address}', ";
@@ -79,33 +88,6 @@ if(isset($_POST['contact_settings'])){
                     <div class="mb-3">
                         <button class="btn btn-primary btn-sm" type="button" onclick="document.getElementById('getFile').click()"><?=$lang['changePhoto']?></button>
                         <input type='file' id="getFile" name="profile_picture" style="display:none">
-                    </div>
-                </div>
-            </div>
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="text-primary fw-bold m-0">Projects</h6>
-                </div>
-                <div class="card-body">
-                    <h4 class="small fw-bold">Server migration<span class="float-end">20%</span></h4>
-                    <div class="progress progress-sm mb-3">
-                        <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="visually-hidden">20%</span></div>
-                    </div>
-                    <h4 class="small fw-bold">Sales tracking<span class="float-end">40%</span></h4>
-                    <div class="progress progress-sm mb-3">
-                        <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="visually-hidden">40%</span></div>
-                    </div>
-                    <h4 class="small fw-bold">Customer Database<span class="float-end">60%</span></h4>
-                    <div class="progress progress-sm mb-3">
-                        <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="visually-hidden">60%</span></div>
-                    </div>
-                    <h4 class="small fw-bold">Payout Details<span class="float-end">80%</span></h4>
-                    <div class="progress progress-sm mb-3">
-                        <div class="progress-bar bg-info" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="visually-hidden">80%</span></div>
-                    </div>
-                    <h4 class="small fw-bold">Account setup<span class="float-end">Complete!</span></h4>
-                    <div class="progress progress-sm mb-3">
-                        <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="visually-hidden">100%</span></div>
                     </div>
                 </div>
             </div>

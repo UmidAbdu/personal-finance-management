@@ -3,6 +3,7 @@ ob_start();
 session_start();
 //include "includes/header.php";
 include "includes/db.php";
+include "functions.php";
 
 if(isset($_GET['lang']) and !empty($_GET['lang'])){
     $_SESSION['lang'] = $_GET['lang'];
@@ -22,8 +23,8 @@ if(isset($_GET['lang']) and !empty($_GET['lang'])){
 
 
 if(isset($_POST['login'])){
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = escape($_POST['username']);
+$password = escape($_POST['password']);
 
 $query = "SELECT * FROM users WHERE username = '{$username}'";
 $select_user_query = mysqli_query($connection, $query);
@@ -42,7 +43,7 @@ if($username === $db_username and $password === $db_user_password){
     $_SESSION['username'] = $db_username;
     header("Location:index.php");
 }else{
-    header("Location:register.php");
+    echo "<p class='bg-danger text-white shadow' >Неправильный логин или пароль</p>";
 }
 }
 
@@ -76,7 +77,6 @@ if($username === $db_username and $password === $db_user_password){
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-
                                 </div>
                                 <div class="p-5">
                                     <form method="get" action=""  id="language-form">

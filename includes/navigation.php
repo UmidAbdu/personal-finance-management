@@ -13,7 +13,7 @@ if (isset($_POST['submit'])){
     $type = $_POST['type'];
     $category = $_POST['category'];
     $amount = $_POST['amount'];
-    $comment = $_POST['comment'];
+    $comment = escape($_POST['comment']);
 
     $query = "INSERT INTO transactions ( transaction_type, amount, t_date, category, comment) 
     VALUES ( '{$type}', '{$amount}', now(), '{$category}', '{$comment}')";
@@ -39,13 +39,13 @@ if (isset($_POST['submit'])){
                             display: none;
                         }
                     </style>
-                    <select name="type" id="list" onchange="jumb()">
-                        <option id='dis'><?=$lang['type']?></option>
+                    <select name="type" id="list" onchange="jumb()" required>
+                        <option id='dis' disabled selected value ><?=$lang['type']?></option>
                         <option value="income" ><?=$lang['income']?></option>
                         <option value="expense"><?=$lang['expense']?></option>
                     </select>
-                    <select name="category" class="sel-1" id="list-2">
-                        <option  id="dis"><?=$lang['category']?></option>
+                    <select name="category" class="sel-1" id="list-2" required>
+                        <option  id="dis" disabled selected value><?=$lang['category']?></option>
                         <option value="salary " class="income"><?=$lang['salary']?></option>
                         <option value="inc " class="income"><?=$lang['inc']?></option>
                         <option value="food" class="expense"><?=$lang['food']?></option>
@@ -74,7 +74,7 @@ if (isset($_POST['submit'])){
 
                         }
                     </script>
-                <input style="margin-right: 5px" type="number" name="amount" placeholder="<?=$lang['amount']?>" required>
+                <input style="margin-right: 5px" type="number" min="1000" name="amount" placeholder="<?=$lang['amount']?>" required>
                     <input type="text" name="comment" placeholder="<?=$lang['comment']?>">
                 <input class="btn btn-primary" type="submit" value="<?=$lang['submit']?>" name="submit">
                 </form>
