@@ -28,23 +28,27 @@ $password = escape($_POST['password']);
 
 $query = "SELECT * FROM users WHERE username = '{$username}'";
 $select_user_query = mysqli_query($connection, $query);
-
-while ($row = mysqli_fetch_array($select_user_query)){
-    $db_id = $row['user_id'];
-    $db_username = $row['username'];
-    $db_email = $row['email'];
-    $db_user_password = $row['password'];
-    $db_user_firstname = $row['firstname'];
-    $db_user_lastname = $row['lastname'];
-    $db_user_picture = $row['profile_picture'];
-}
-if($username === $db_username and $password === $db_user_password){
-    $_SESSION['user_id'] = $db_id;
-    $_SESSION['username'] = $db_username;
-    header("Location:index.php");
-}else{
+$row = mysqli_fetch_array($select_user_query);
+if(isset($row)){
+   //  $row = mysqli_fetch_array($select_user_query);
+        $db_id = $row['user_id'];
+        $db_username = $row['username'];
+        $db_email = $row['email'];
+        $db_user_password = $row['password'];
+        $db_user_firstname = $row['firstname'];
+        $db_user_lastname = $row['lastname'];
+        $db_user_picture = $row['profile_picture'];
+    if($username === $db_username and $password === $db_user_password){
+        $_SESSION['user_id'] = $db_id;
+        $_SESSION['username'] = $db_username;
+        header("Location:index.php");
+    }else{
+        echo "<p class='bg-danger text-white shadow' >Неправильный логин или пароль</p>";
+    }
+} else{
     echo "<p class='bg-danger text-white shadow' >Неправильный логин или пароль</p>";
 }
+
 }
 
 
@@ -81,8 +85,8 @@ if($username === $db_username and $password === $db_user_password){
                                 <div class="p-5">
                                     <form method="get" action=""  id="language-form">
                                     <select name="lang" class="form-control" onchange="changeLanguage()">
-                                        <option value="eng" <?php if(isset($_SESSION['lang']) and $_SESSION['lang'] == 'eng'){echo "selected";} ?>>english</option>
                                         <option value="ru" <?php if(isset($_SESSION['lang']) and $_SESSION['lang'] == 'ru'){echo "selected";} ?>>русский</option>
+                                        <option value="eng" <?php if(isset($_SESSION['lang']) and $_SESSION['lang'] == 'eng'){echo "selected";} ?>>english</option>
                                     </select>
                                     </form>
                                     <div class="text-center">

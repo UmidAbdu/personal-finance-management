@@ -43,6 +43,17 @@ if(isset($_POST['save_settings'])){
         }
     }
 
+    $select = mysqli_query($connection, "SELECT * FROM users WHERE username = '".$_POST['username']."'");
+    if(mysqli_num_rows($select) > 1) {
+        echo "<p class='bg-danger text-white shadow' >Имя пользователя уже существует</p>";
+    }
+    $selecte = mysqli_query($connection, "SELECT * FROM users WHERE email = '".$_POST['email']."'");
+    if(mysqli_num_rows($selecte ) > 1) {
+        echo "<p class='bg-danger text-white shadow' >Этот адрес электронной почты уже существует</p>";
+    }
+
+    if(!(mysqli_num_rows($select)>1) and !(mysqli_num_rows($selecte)>1))
+
     $query = "UPDATE users SET ";
     $query .= "username = '{$username}',";
     $query .= "firstname = '{$firstname}',";

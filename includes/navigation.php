@@ -13,10 +13,12 @@ if (isset($_POST['submit'])){
     $type = $_POST['type'];
     $category = $_POST['category'];
     $amount = $_POST['amount'];
+    $input_date=$_POST['date'];
+    $date=date("Y-m-d",strtotime($input_date));
     $comment = escape($_POST['comment']);
 
     $query = "INSERT INTO transactions ( transaction_type, amount, t_date, category, comment) 
-    VALUES ( '{$type}', '{$amount}', now(), '{$category}', '{$comment}')";
+    VALUES ( '{$type}', '{$amount}', '{$date}', '{$category}', '{$comment}')";
 
     $send_query = mysqli_query($connection, $query);
 
@@ -28,8 +30,8 @@ if (isset($_POST['submit'])){
 <div class="d-flex flex-column" id="content-wrapper">
     <div id="content">
         <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-            <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                <form action="" method="post">
+            <div class="container-fluid " >
+                <form class="d-flex" action="" method="post" >
                     <style>
                         .show {
                             display: block;
@@ -39,20 +41,20 @@ if (isset($_POST['submit'])){
                             display: none;
                         }
                     </style>
-                    <select name="type" id="list" onchange="jumb()" required>
+                    <select style="margin-right: 5px" name="type" id="list" onchange="jumb()" required>
                         <option id='dis' disabled selected value ><?=$lang['type']?></option>
                         <option value="income" ><?=$lang['income']?></option>
                         <option value="expense"><?=$lang['expense']?></option>
                     </select>
-                    <select name="category" class="sel-1" id="list-2" required>
+                    <select style="margin-right: 5px" name="category" class="sel-1" id="list-2" required>
                         <option  id="dis" disabled selected value><?=$lang['category']?></option>
                         <option value="salary " class="income"><?=$lang['salary']?></option>
-                        <option value="inc " class="income"><?=$lang['inc']?></option>
+                        <option value="inc" class="income"><?=$lang['inc']?></option>
                         <option value="food" class="expense"><?=$lang['food']?></option>
-                        <option value="transport " class="expense"><?=$lang['transport']?></option>
-                        <option value="mobile " class="expense"><?=$lang['mobile']?></option>
-                        <option value="internet " class="expense"><?=$lang['internet']?></option>
-                        <option value="fun " class="expense"><?=$lang['fun']?></option>
+                        <option value="transport" class="expense"><?=$lang['transport']?></option>
+                        <option value="mobile" class="expense"><?=$lang['mobile']?></option>
+                        <option value="internet" class="expense"><?=$lang['internet']?></option>
+                        <option value="fun" class="expense"><?=$lang['fun']?></option>
                         <option value="other" class="expense"><?=$lang['other']?></option>
                     </select>
 
@@ -74,8 +76,9 @@ if (isset($_POST['submit'])){
 
                         }
                     </script>
-                <input style="margin-right: 5px" type="number" min="1000" name="amount" placeholder="<?=$lang['amount']?>" required>
-                    <input type="text" name="comment" placeholder="<?=$lang['comment']?>">
+                    <input type="date" style="width:140px; margin-right: 5px" name="date" value="<?=date('Y-m-d')?>">
+                <input style="width: 150px; margin-right: 5px " type="number" min="1000" name="amount" placeholder="<?=$lang['amount']?>" required>
+                    <input style="width: 170px; margin-right: 5px" type="text" name="comment" placeholder="<?=$lang['comment']?>">
                 <input class="btn btn-primary" type="submit" value="<?=$lang['submit']?>" name="submit">
                 </form>
                 <ul class="navbar-nav flex-nowrap ms-auto">

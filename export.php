@@ -13,7 +13,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
-header('Content-Type: text/csv; charset=utf-8');
+header('Content-Type: text/csv; charset=utf-8 lang=ru' );
 header('Content-Disposition: attachment; filename=transactions.csv');
 $output = fopen('php://output', 'w');
 fputcsv($output, array('ID', 'Type', 'category', 'amount', 'data', 'comment'));

@@ -3,7 +3,7 @@ include "includes/db.php";
 include "includes/header.php";
 include "includes/sidebar.php";
 include "includes/navigation.php";
-;?>
+?>
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4"><?=$lang['history']?></h3>
                     <div class="card shadow">
@@ -24,17 +24,42 @@ include "includes/navigation.php";
                                             <th><?=$lang['amount']?></th>
                                             <th><?=$lang['total']?></th>
                                             <th><?=$lang['comment']?></th>
+                                            <th><?=$lang['edit']?></th>
+                                            <th><?=$lang['delete']?></th>
                                         </tr>
                                     </thead>
                                     <?php
+
+                                    $query1 = "SELECT * FROM transactions WHERE MONTH(t_date) != MONTH(CURRENT_DATE())
+                                    AND YEAR(t_date) = YEAR(CURRENT_DATE()) ";
+
+                                    $select_transaction = mysqli_query($connection, $query1);
+
+                                    if(!$select_transaction)
+                                    {
+                                        die('QUERY FAILED' . mysqli_error($connection));
+                                    }
+                                    $amount = 0;
+
+                                    while ($row = mysqli_fetch_assoc($select_transaction)){
+
+                                        $type = $row['transaction_type'];
+                                        if($type == 'income') {
+                                            $amount += $row['amount'];
+                                        } else{
+                                            $amount -= $row['amount'];
+                                        }
+                                    }
+
 
                                     $query = "SELECT * FROM transactions WHERE MONTH(t_date) = MONTH(CURRENT_DATE())
                                     AND YEAR(t_date) = YEAR(CURRENT_DATE()) ORDER BY t_date ASC";
                                     $select_action = mysqli_query($connection, $query);
 
-                                    $balance = 0;
+                                    $balance = $amount;
 
                                     while ($row = mysqli_fetch_assoc($select_action)){
+                                        $transaction_id = $row['transaction_id'];
                                         $amount = $row['amount'];
                                         $type = $row['transaction_type'];
                                         $category = $row['category'];
@@ -48,6 +73,7 @@ include "includes/navigation.php";
                                             $balance -= $row['amount'];
                                         }
 
+
                                         ?>
                                     <tbody>
                                         <tr>
@@ -56,10 +82,26 @@ include "includes/navigation.php";
                                             <td><?=$date?></td>
                                             <td><?=number_format($amount, 2, ".", " ") . ' UZS'?></td>
                                             <td><?=number_format($balance, 2, ".", " ") . ' UZS'?></td>
-                                            <td><?=substr($comment,0,20)?></td>
+                                            <td><?=substr($comment,0,30)?></td>
+                                            <td><a href="edit.php?edit=<?=$transaction_id?>"><?=$lang['edit']?></a></td>
+                                            <td><a href="table.php?delete=<?=$transaction_id?>" onclick="return confirm('<?=$lang['confirm']?>');"><?=$lang['delete']?></a></td>
                                         </tr>
                                     </tbody>
-                                    <?php } ?>
+                                    <?php }
+
+                                    if(isset($_GET['delete'])){
+
+                                        $the_transaction_id = $_GET['delete'];
+                                        $query = "DELETE FROM transactions WHERE transaction_id = {$the_transaction_id}";
+                                        $delete_transaction_query = mysqli_query($connection, $query);
+
+                                        header("Location:table.php");
+
+                                        if(!$delete_transaction_query){
+                                            die('QUERY FAILED' . mysqli_error($connection));
+                                        }
+                                    }
+                                    ?>
                                     <tfoot>
                                         <tr>
                                             <td><strong><?=$lang['type']?></strong></td>
@@ -68,6 +110,8 @@ include "includes/navigation.php";
                                             <td><strong><?=$lang['amount']?></strong></td>
                                             <td><strong><?=$lang['total']?></strong></td>
                                             <td><strong><?=$lang['comment']?></strong></td>
+                                            <td><strong><?=$lang['edit']?></strong></td>
+                                            <th><strong><?=$lang['delete']?></strong></th>
                                         </tr>
                                     </tfoot>
                                 </table>

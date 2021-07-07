@@ -37,6 +37,7 @@ $isPasswordValid = true;
 $isNewPasswordValid = true;
 $isPhoneNumberValid = true;
 $isEmailValid = true;
+$isUserName = true;
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,9 +59,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $isNewPasswordValid = $password == $confirm_password;
     $isMobilePhoneValid = preg_match("/^(\+)?([ 0-9]){5,16}$/", $phone_number);
     $isEmailValid = preg_match("/^[A-Za-z0-9+_.-]+@(.+)$/", $email);
+    $select = mysqli_query($connection, "SELECT * FROM users WHERE username = '".$_POST['username']."'");
+    if(mysqli_num_rows($select)) {
+        echo "<p class='bg-danger text-white shadow' >Имя пользователя уже существует</p>";
+    }
+    $selecte = mysqli_query($connection, "SELECT * FROM users WHERE email = '".$_POST['email']."'");
+    if(mysqli_num_rows($selecte)) {
+        echo "<p class='bg-danger text-white shadow' >Этот адрес электронной почты уже существует</p>";
+    }
+
 
     $isValid = ($isNameValid and $isLastnameValid and $isUserNameValid and $isPasswordValid and $isNewPasswordValid
-    and $isMobilePhoneValid and $isEmailValid);
+    and $isMobilePhoneValid and $isEmailValid and !mysqli_num_rows($select) and !mysqli_num_rows($selecte));
 
     if ($isValid) {
         //inserting new user into database
@@ -73,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!$insert_user) {
             die('QUERY FAILED' . mysqli_error($connection));
         }
+        echo "<p class='bg-success text-white shadow' >Аккаунт успешно создан</p>";
     }
 }
 

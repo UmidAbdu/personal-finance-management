@@ -72,7 +72,11 @@ $lang = array(
     "date" => "Date",
     "history" => "History(monthly)",
     "transactions" => "Transactions",
-    "total" => "Total"
+    "total" => "Total",
+    "delete" => "Delete",
+    "edit" => "Edit",
+    "confirm" => "Are you sure you want to delete this item?",
+    "update" => "Update data"
 
 );
 ?>
